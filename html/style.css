@@ -1,0 +1,234 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8d7da;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.scene {
+  position: relative;
+  width: 350px;
+  height: 350px;
+}
+
+/* =========================
+   ENVELOPE
+========================= */
+
+.envelope {
+  position: absolute;
+  width: 280px;
+  height: 180px;
+
+  left: 35px;
+  bottom: 40px;
+
+  background: #ffffff;
+  border: 2px solid #e5a4aa;
+
+  cursor: pointer;
+
+  z-index: 5;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Envelope flap */
+
+.flap {
+  position: absolute;
+
+  width: 0;
+  height: 0;
+
+  top: 0;
+  left: 0;
+
+  border-left: 138px solid transparent;
+  border-right: 138px solid transparent;
+  border-top: 100px solid #f2b6bd;
+
+  transform-origin: top;
+
+  transition: transform 0.6s ease;
+
+  z-index: 2;
+}
+
+/* Heart on envelope */
+
+.heart {
+  position: absolute;
+
+  top: 75px;
+  left: 115px;
+
+  font-size: 45px;
+
+  z-index: 3;
+}
+
+/* =========================
+   LETTER
+========================= */
+
+.letter {
+  position: absolute;
+
+  width: 270px;
+  height: 170px;
+
+  left: 40px;
+  bottom: 70px;
+
+  background: #ffffff;
+
+  text-align: center;
+
+  padding: 25px;
+
+  border-radius: 5px;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+
+  transform: translateY(100px);
+
+  opacity: 0;
+
+  transition: all 0.8s ease;
+
+  z-index: 2;
+}
+
+/* Letter title */
+
+.letter p:first-child {
+  font-size: 28px;
+
+  font-weight: bold;
+
+  margin-top: 0;
+
+  margin-bottom: 25px;
+}
+
+/* Letter message */
+
+.letter p:last-child {
+  font-size: 21px;
+
+  margin: 0;
+}
+
+/* =========================
+   BALLOONS
+========================= */
+
+.balloons {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  bottom: 0;
+  left: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.balloons span {
+  position: absolute;
+
+  /*
+    All balloons start here,
+    near the envelope.
+  */
+
+  left: 145px;
+  bottom: 60px;
+
+  font-size: 45px;
+
+  opacity: 0;
+
+  transition: all 1.2s ease;
+}
+
+/* =========================
+   PARTY BALLOONS
+========================= */
+
+/* Balloon 1
+   Goes far LEFT */
+
+.scene.open .balloons span:nth-child(1) {
+  opacity: 1;
+
+  transform: translate(-180px, -220px) rotate(-25deg);
+}
+
+/* Balloon 2
+   Goes UP and LEFT */
+
+.scene.open .balloons span:nth-child(2) {
+  opacity: 1;
+
+  transform: translate(-100px, -330px) rotate(15deg);
+}
+
+/* Balloon 3
+   Goes STRAIGHT UP */
+
+.scene.open .balloons span:nth-child(3) {
+  opacity: 1;
+
+  transform: translate(0, -350px) rotate(-10deg);
+}
+
+/* Balloon 4
+   Goes UP and RIGHT */
+
+.scene.open .balloons span:nth-child(4) {
+  opacity: 1;
+
+  transform: translate(110px, -300px) rotate(20deg);
+}
+
+/* Balloon 5
+   Goes far RIGHT */
+
+.scene.open .balloons span:nth-child(5) {
+  opacity: 1;
+
+  transform: translate(190px, -200px) rotate(-20deg);
+}
+
+/* =========================
+   OPEN ENVELOPE
+========================= */
+
+/* Open flap */
+
+.scene.open .flap {
+  transform: rotateX(180deg);
+}
+
+/* Bring letter to FRONT */
+
+.scene.open .letter {
+  transform: translateY(-120px);
+
+  opacity: 1;
+
+  z-index: 10;
+}
