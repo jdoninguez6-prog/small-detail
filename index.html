@@ -3,33 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Love Envelope</title>
+
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <div class="scene">
+      <!-- Decorative hearts -->
+      <div class="floating-hearts">
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+      </div>
+
       <!-- Balloons -->
       <div class="balloons">
-        <span>🎈</span>
-        <span>🎈</span>
-        <span>🎈</span>
-        <span>🎈</span>
-        <span>🎈</span>
+        <span class="balloon navy"></span>
+        <span class="balloon white"></span>
+        <span class="balloon black"></span>
+
+        <span class="balloon navy"></span>
+        <span class="balloon black"></span>
+        <span class="balloon white"></span>
+
+        <span class="balloon navy"></span>
+        <span class="balloon black"></span>
+        <span class="balloon navy"></span>
       </div>
 
       <!-- Letter -->
       <div class="letter">
-        <p>Alina,</p>
-        <p>You are beautiful ❤️</p>
+        <p class="letter-title">Look,</p>
+
+        <p class="letter-message">This is the most beautiful girl.</p>
+
+        <p class="letter-message">Have a nice day, cute girl ❤️</p>
+
+        <!-- Picture -->
+        <img
+          src="photo_2026-09-15_08-53-32.jpg"
+          alt="Beautiful girl"
+          class="letter-image"
+        />
+
+        <div class="letter-heart">♥</div>
+
+        <p class="amazing">Y O U &nbsp; A R E &nbsp; A M A Z I N G ❤️</p>
       </div>
 
       <!-- Envelope -->
       <div class="envelope" id="envelope">
         <div class="flap"></div>
-        <div class="heart">❤️</div>
+
+        <div class="envelope-heart">❤️</div>
       </div>
     </div>
+
+    <!-- Music -->
+    <audio id="song" src="Sweet Harmony.mp3"></audio>
 
     <script src="script.js"></script>
   </body>

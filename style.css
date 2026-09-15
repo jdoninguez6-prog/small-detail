@@ -4,19 +4,239 @@
 
 body {
   margin: 0;
+
   min-height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   background: #f8d7da;
+
   font-family: Arial, sans-serif;
+
   overflow: hidden;
 }
 
+/* =========================
+   MAIN SCENE
+========================= */
+
 .scene {
   position: relative;
-  width: 350px;
-  height: 350px;
+
+  width: min(95vw, 700px);
+  height: min(95vh, 800px);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* =========================
+   BALLOONS
+========================= */
+
+.balloons {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.balloons span {
+  position: absolute;
+
+  width: 55px;
+  height: 68px;
+
+  border-radius: 50% 50% 45% 45%;
+
+  left: 50%;
+  bottom: 260px;
+
+  opacity: 0;
+
+  transition:
+    transform 1.2s ease,
+    opacity 0.8s ease;
+}
+
+/* Balloon colors */
+
+.balloon.navy {
+  background: #172554;
+}
+
+.balloon.black {
+  background: #111111;
+}
+
+.balloon.white {
+  background: #ffffff;
+
+  border: 2px solid #cccccc;
+}
+
+/* Balloon knot */
+
+.balloons span::after {
+  content: "";
+
+  position: absolute;
+
+  width: 10px;
+  height: 10px;
+
+  left: 22px;
+  bottom: -5px;
+
+  background: inherit;
+
+  transform: rotate(45deg);
+}
+
+/* Balloon highlight */
+
+.balloons span::before {
+  content: "";
+
+  position: absolute;
+
+  width: 10px;
+  height: 18px;
+
+  top: 10px;
+  right: 10px;
+
+  background: rgba(255, 255, 255, 0.55);
+
+  border-radius: 50%;
+}
+
+/* =========================
+   BALLOON POSITIONS
+========================= */
+
+.scene.open .balloons span {
+  opacity: 1;
+}
+
+/* Left */
+
+.scene.open .balloons span:nth-child(1) {
+  transform: translate(-280px, -260px) rotate(-15deg);
+}
+
+/* Upper left */
+
+.scene.open .balloons span:nth-child(2) {
+  transform: translate(-150px, -430px) rotate(10deg);
+}
+
+/* Left middle */
+
+.scene.open .balloons span:nth-child(3) {
+  transform: translate(-360px, -100px) rotate(-15deg);
+}
+
+/* Upper center */
+
+.scene.open .balloons span:nth-child(4) {
+  transform: translate(-30px, -500px) rotate(-5deg);
+}
+
+/* Right middle */
+
+.scene.open .balloons span:nth-child(5) {
+  transform: translate(300px, -150px) rotate(15deg);
+}
+
+/* Upper right */
+
+.scene.open .balloons span:nth-child(6) {
+  transform: translate(170px, -430px) rotate(-10deg);
+}
+
+/* Far left */
+
+.scene.open .balloons span:nth-child(7) {
+  transform: translate(-390px, -300px) rotate(10deg);
+}
+
+/* Far right */
+
+.scene.open .balloons span:nth-child(8) {
+  transform: translate(390px, -300px) rotate(-15deg);
+}
+
+/* Right upper */
+
+.scene.open .balloons span:nth-child(9) {
+  transform: translate(30px, -390px) rotate(10deg);
+}
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.floating-hearts {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+.floating-hearts span {
+  position: absolute;
+
+  color: #ff4d73;
+
+  font-size: 28px;
+
+  opacity: 0;
+
+  transition: all 1.5s ease;
+}
+
+.scene.open .floating-hearts span {
+  opacity: 0.8;
+}
+
+.floating-hearts span:nth-child(1) {
+  left: 15%;
+  top: 35%;
+}
+
+.floating-hearts span:nth-child(2) {
+  left: 25%;
+  top: 65%;
+}
+
+.floating-hearts span:nth-child(3) {
+  left: 75%;
+  top: 30%;
+}
+
+.floating-hearts span:nth-child(4) {
+  left: 85%;
+  top: 55%;
+}
+
+.floating-hearts span:nth-child(5) {
+  left: 18%;
+  top: 80%;
+}
+
+.floating-hearts span:nth-child(6) {
+  left: 82%;
+  top: 78%;
 }
 
 /* =========================
@@ -25,20 +245,25 @@ body {
 
 .envelope {
   position: absolute;
-  width: 280px;
-  height: 180px;
 
-  left: 35px;
+  width: min(520px, 78vw);
+  height: 300px;
+
   bottom: 40px;
 
-  background: #ffffff;
-  border: 2px solid #e5a4aa;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  background: #f7a9b5;
+
+  border-radius: 5px;
+
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.18);
 
   cursor: pointer;
 
   z-index: 5;
-
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Envelope flap */
@@ -50,30 +275,36 @@ body {
   height: 0;
 
   top: 0;
-  left: 0;
+  left: 50%;
 
-  border-left: 138px solid transparent;
-  border-right: 138px solid transparent;
-  border-top: 100px solid #f2b6bd;
+  transform: translateX(-50%);
+
+  border-left: min(260px, 39vw) solid transparent;
+  border-right: min(260px, 39vw) solid transparent;
+  border-top: 170px solid #f48fa1;
 
   transform-origin: top;
 
-  transition: transform 0.6s ease;
+  transition: transform 0.7s ease;
 
-  z-index: 2;
+  z-index: 8;
 }
 
-/* Heart on envelope */
+/* Envelope heart */
 
-.heart {
+.envelope-heart {
   position: absolute;
 
-  top: 75px;
-  left: 115px;
+  left: 50%;
+  bottom: 70px;
 
-  font-size: 45px;
+  transform: translateX(-50%);
 
-  z-index: 3;
+  font-size: 65px;
+
+  z-index: 10;
+
+  transition: opacity 0.3s ease;
 }
 
 /* =========================
@@ -83,152 +314,200 @@ body {
 .letter {
   position: absolute;
 
-  width: 270px;
-  height: 170px;
+  width: min(470px, 70vw);
 
-  left: 40px;
-  bottom: 70px;
+  height: 650px;
+
+  left: 50%;
+
+  bottom: 80px;
+
+  transform: translate(-50%, 100px);
 
   background: #ffffff;
 
+  border-radius: 14px;
+
+  padding: 30px 35px;
+
   text-align: center;
 
-  padding: 25px;
-
-  border-radius: 5px;
-
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-
-  transform: translateY(100px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 
   opacity: 0;
 
-  transition: all 0.8s ease;
+  transition:
+    transform 0.9s ease,
+    opacity 0.8s ease;
 
-  z-index: 2;
+  z-index: 3;
+
+  overflow: hidden;
 }
 
-/* Letter title */
+/* =========================
+   LETTER TEXT
+========================= */
 
-.letter p:first-child {
-  font-size: 28px;
+.letter-title {
+  margin: 0 0 20px;
+
+  font-size: clamp(32px, 5vw, 48px);
 
   font-weight: bold;
 
-  margin-top: 0;
-
-  margin-bottom: 25px;
+  color: #111111;
 }
 
-/* Letter message */
+.letter-message {
+  margin: 8px 0;
 
-.letter p:last-child {
-  font-size: 21px;
+  font-size: clamp(18px, 3vw, 25px);
 
-  margin: 0;
+  line-height: 1.25;
+
+  color: #111111;
 }
 
 /* =========================
-   BALLOONS
+   PHOTO
 ========================= */
 
-.balloons {
-  position: absolute;
+.letter-image {
+  display: block;
 
   width: 100%;
-  height: 100%;
 
-  bottom: 0;
-  left: 0;
+  height: 310px;
 
-  pointer-events: none;
+  object-fit: cover;
 
-  z-index: 1;
-}
+  object-position: center;
 
-.balloons span {
-  position: absolute;
+  margin: 20px auto 0;
 
-  /*
-    All balloons start here,
-    near the envelope.
-  */
+  border-radius: 12px;
 
-  left: 145px;
-  bottom: 60px;
-
-  font-size: 45px;
-
-  opacity: 0;
-
-  transition: all 1.2s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 /* =========================
-   PARTY BALLOONS
+   HEART UNDER PHOTO
 ========================= */
 
-/* Balloon 1
-   Goes far LEFT */
+.letter-heart {
+  margin-top: 15px;
 
-.scene.open .balloons span:nth-child(1) {
-  opacity: 1;
+  font-size: 48px;
 
-  transform: translate(-180px, -220px) rotate(-25deg);
+  color: #ff3264;
 }
 
-/* Balloon 2
-   Goes UP and LEFT */
+/* =========================
+   AMAZING MESSAGE
+========================= */
 
-.scene.open .balloons span:nth-child(2) {
-  opacity: 1;
+.amazing {
+  margin: 5px 0 0;
 
-  transform: translate(-100px, -330px) rotate(15deg);
-}
+  font-size: 13px;
 
-/* Balloon 3
-   Goes STRAIGHT UP */
+  font-weight: bold;
 
-.scene.open .balloons span:nth-child(3) {
-  opacity: 1;
+  letter-spacing: 3px;
 
-  transform: translate(0, -350px) rotate(-10deg);
-}
-
-/* Balloon 4
-   Goes UP and RIGHT */
-
-.scene.open .balloons span:nth-child(4) {
-  opacity: 1;
-
-  transform: translate(110px, -300px) rotate(20deg);
-}
-
-/* Balloon 5
-   Goes far RIGHT */
-
-.scene.open .balloons span:nth-child(5) {
-  opacity: 1;
-
-  transform: translate(190px, -200px) rotate(-20deg);
+  color: #222222;
 }
 
 /* =========================
    OPEN ENVELOPE
 ========================= */
 
-/* Open flap */
-
 .scene.open .flap {
-  transform: rotateX(180deg);
+  transform: translateX(-50%) rotateX(180deg);
 }
 
-/* Bring letter to FRONT */
-
 .scene.open .letter {
-  transform: translateY(-120px);
+  transform: translate(-50%, -220px);
 
   opacity: 1;
 
-  z-index: 10;
+  z-index: 7;
+}
+
+.scene.open .envelope-heart {
+  opacity: 0;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .scene {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .envelope {
+    width: 85vw;
+    height: 230px;
+
+    bottom: 30px;
+  }
+
+  .letter {
+    width: 82vw;
+
+    height: 560px;
+
+    bottom: 50px;
+
+    padding: 22px;
+  }
+
+  .letter-image {
+    height: 250px;
+  }
+
+  .balloons span {
+    width: 40px;
+    height: 50px;
+  }
+
+  .scene.open .balloons span:nth-child(1) {
+    transform: translate(-130px, -250px);
+  }
+
+  .scene.open .balloons span:nth-child(2) {
+    transform: translate(-70px, -350px);
+  }
+
+  .scene.open .balloons span:nth-child(3) {
+    transform: translate(-170px, -100px);
+  }
+
+  .scene.open .balloons span:nth-child(4) {
+    transform: translate(0, -400px);
+  }
+
+  .scene.open .balloons span:nth-child(5) {
+    transform: translate(140px, -100px);
+  }
+
+  .scene.open .balloons span:nth-child(6) {
+    transform: translate(80px, -350px);
+  }
+
+  .scene.open .balloons span:nth-child(7) {
+    transform: translate(-180px, -250px);
+  }
+
+  .scene.open .balloons span:nth-child(8) {
+    transform: translate(180px, -250px);
+  }
+
+  .scene.open .balloons span:nth-child(9) {
+    transform: translate(0, -300px);
+  }
 }
